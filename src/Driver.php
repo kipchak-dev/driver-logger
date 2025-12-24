@@ -19,6 +19,7 @@ class Driver implements Interfaces\Driver
     public static function initialise(ContainerInterface $container): void
     {
         self::$container = $container;
+        self::set();
     }
 
     public static function set(): void
@@ -42,14 +43,7 @@ class Driver implements Interfaces\Driver
      */
     public static function get(?string $configKey = null): Logger
     {
-        if(self::$container !== null &&self::$container->has('drivers.logger') && $configKey === null){
-            return self::$container->get('drivers.logger');
-        }
-        $name = $configKey ?? 'kipchak';
-        $log = new Logger($name);
-        $log->pushHandler(new StreamHandler('php://stdout', self::getLogLevel()));
-
-        return $log;
+        return self::$container->get('drivers.logger');
     }
 
     protected static function loadConfig(): void
