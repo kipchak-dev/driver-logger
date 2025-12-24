@@ -1,0 +1,29 @@
+{
+    "name": "kipchak/driver-logger",
+    "type": "driver",
+    "description": "A Logging Kipchak driver (dependency) for the Kipchak API Development Kit (ADK)",
+    "keywords": [
+        "APIs",
+        "HTTP",
+        "Microservices",
+        "Mamluk",
+        "Configuration"
+    ],
+    "homepage": "https://mamluk.net",
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Kipchak\\Driver\\Logger\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "kipchak/core": "2.x-dev",
+        "monolog/monolog": "^3.9",
+        "kipchak/driver-config": "dev-master"
+    }
+}
