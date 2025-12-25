@@ -11,7 +11,7 @@ Use Monolog\Logger;
 use Monolog\Level;
 Use Monolog\Handler\StreamHandler;
 
-class Driver implements Interfaces\Driver
+class Logger implements Interfaces\Driver
 {
     protected static ?ContainerInterface $container = null;
     protected static $apiConfig;
