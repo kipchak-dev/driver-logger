@@ -6,8 +6,8 @@ use Kipchak\Core\Interfaces;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Kipchak\Driver\Config\Driver as Config;
-Use Monolog\Logger;
+use Kipchak\Driver\Config\Config;
+Use Monolog\Logger as MonoLogger;
 use Monolog\Level;
 Use Monolog\Handler\StreamHandler;
 
@@ -24,10 +24,10 @@ class Logger implements Interfaces\Driver
 
     public static function set(): void
     {
-        self::$container->set('drivers.logger', function(ContainerInterface $c): ?Logger {
+        self::$container->set('drivers.logger', function(ContainerInterface $c): ?MonoLogger {
             if (!empty(Config::get('kipchak.api'))) {
                 $logLevel = self::getLogLevel();
-                $log = new Logger(self::$apiConfig['name']);
+                $log = new MonoLogger(self::$apiConfig['name']);
                 $log->pushHandler(new StreamHandler('php://stdout', $logLevel));
 
                 return $log;
@@ -39,11 +39,10 @@ class Logger implements Interfaces\Driver
 
     /**
      * @param string|null $configKey
-     * @param string|null $configFileName
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public static function get(?string $configKey = null): Logger
+    public static function get(?string $configKey = null): MonoLogger
     {
         return self::$container->get('drivers.logger');
     }
