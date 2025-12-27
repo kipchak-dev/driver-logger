@@ -1,34 +1,34 @@
 # HTTP Driver for Kipchak
 
-This driver is a Config management driver for Kipchak.
-
-It is bundled into Kipchak and does not need to be installed separately.
+This is a logging driver for Kipchak and is based on Monolog.
 
 #### Composer Package 
 
-`kipchak/driver-config`
+`kipchak/driver-logger`
 
 #### Sample Config File:
 
-This driver does not require any configuration.
+This driver requires the `kipchak.api.php` config file to be present in the config directory of your project.
+
+Please see the sample config file at https://1x.ax/mamluk/kipchak/starter/~files/master/config/kipchak.api.php.
 
 ## How to use it?
 
-Install it via composer: `composer require kipchak/driver-config`.
+Install it via composer: `composer require kipchak/driver-logger`.
 
 ### Example Usage
 
 ```php
 // Load the HTTP driver.
-$http = \Mamluk\Kipchak\Driver\Config\Driver::get('file_name_without_extension')
-// Use the HTTP client ($http) client as you normally would.
+$logger = \Mamluk\Kipchak\Driver\Logger\Logger::get();
+// Use $logger like Monolog's logger.
 ```
 
 ## What is a Kipchak Driver?
 
-Kipchak Drivers are used to connect Kipchak to various data sources or storage systems. 
+Kipchak Drivers are used to connect Kipchak to various data sources or storage systems.
 
-They provide a standardized interface for interacting with different data sources, allowing developers to 
+They provide a standardized interface for interacting with different data sources, allowing developers to
 focus on building their applications rather than dealing with the complexities of each data source.
 
 Drivers were introduced as a part of the Kipchak 2.0 release.
@@ -37,11 +37,13 @@ Drivers are basically Container Dependencies injected into Kipchak's Service Con
 
 ## How do Kipchak Drivers work?
 
-Kipchak drivers are wired into the Service Container via a config file (where required).
+Some Kipchak drivers are wired into the Service Container via a config file (where required).
 
-Each driver defines an implementation of Kipchak's Driver Interface. 
-Where applicable, the dependency may accept a parameter for a specific instance of the driver specified as a onfig property, 
-for instance, in the case of multiple database connections or S3 buckets.
+If applicable, you will find a sample config file in this repository as well as in the starter project at https://1x.ax/mamluk/kipchak/starter.
 
-So you may access the driver by invoking \Mamluk\Kipchak\Driver\Http\Driver::get('default'), where 
-`default` is the name of the connection specified in the config file.
+Each driver defines an implementation of Kipchak's Driver Interface. Where applicable, the dependency may
+accept a parameter for a specific instance of the driver specified as a config property, for instance, in the case
+of multiple database connections or S3 buckets.
+
+So you may access the driver by invoking \Mamluk\Kipchak\Driver\Memcached\Memcached::get('cache'), where
+`cache` is the name of one of the memcached connection pools specified in the config file.
