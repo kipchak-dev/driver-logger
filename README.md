@@ -20,7 +20,7 @@ Install it via composer: `composer require kipchak/driver-logger`.
 
 ```php
 // Load the HTTP driver.
-$logger = \Mamluk\Kipchak\Driver\Logger\Logger::get();
+$logger = Kipchak\Driver\Logger\Logger::get();
 // Use $logger like Monolog's logger.
 ```
 
