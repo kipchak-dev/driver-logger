@@ -28,6 +28,18 @@ class Logger implements Interfaces\Driver
             if (!empty(Config::get('kipchak.api'))) {
                 $logLevel = self::getLogLevel();
                 $log = new MonoLogger(self::$apiConfig['name']);
+
+                // Optional list of Monolog processors. Each entry is either a
+                // fully-qualified class name (instantiated with no constructor
+                // args) or an already-constructed processor instance/callable.
+                // Bundled processors live under Kipchak\Driver\Logger\Processors\.
+                foreach ((self::$apiConfig['logProcessors'] ?? []) as $processor) {
+                    if (is_string($processor)) {
+                        $processor = new $processor();
+                    }
+                    $log->pushProcessor($processor);
+                }
+
                 $log->pushHandler(new StreamHandler('php://stdout', $logLevel));
 
                 return $log;

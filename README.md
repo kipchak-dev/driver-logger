@@ -24,6 +24,25 @@ $logger = Kipchak\Driver\Logger\Logger::get();
 // Use $logger like Monolog's logger.
 ```
 
+### Registering Monolog processors
+
+Add an optional `logProcessors` array to your `kipchak.api.php` config. Each
+entry can be a fully-qualified class name (instantiated with no constructor
+args) or an already-constructed processor instance / callable. Processors
+listed here are pushed onto the Monolog logger before any handler runs.
+
+```php
+return [
+    'name' => 'my-api',
+    // ...
+    'logProcessors' => [
+        \App\Logger\Processors\MyProcessor::class,
+    ],
+];
+```
+
+The driver does not bundle any processors of its own — bring your own.
+
 ## What is a Kipchak Driver?
 
 Kipchak Drivers are used to connect Kipchak to various data sources or storage systems.
