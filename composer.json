@@ -22,7 +22,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "kipchak/core": "^2",
+        "kipchak/core": "^2 || ^3",
         "monolog/monolog": "^3.9",
         "kipchak/driver-config": "^1"
     }
