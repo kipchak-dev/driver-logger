@@ -10,7 +10,7 @@ This is a logging driver for Kipchak and is based on Monolog.
 
 This driver requires the `kipchak.api.php` config file to be present in the config directory of your project.
 
-Please see the sample config file at https://1x.ax/mamluk/kipchak/starter/~files/master/config/kipchak.api.php.
+Please see the sample config file at https://github.com/kipchak-dev/starter/blob/master/config/kipchak.api.php.
 
 ## How to use it?
 
